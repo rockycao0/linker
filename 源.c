@@ -17,7 +17,7 @@ int main()
 	head = (struct list*)malloc(sizeof(struct list));
 	head->date = NULL;
 	head->next = NULL;
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		scanf_s("%d", &number[i]);
 		insert(head, number[i]);
@@ -53,11 +53,14 @@ void delate(struct list *head, int num)
 	q = (struct list*)malloc(sizeof(struct list));
 	p->date = num;
 	q = head;
-	while (p->date != (q->next->date))
+	while (p->date != (q->next->date)&&(q->next->next)!=NULL)
 	{
 		q = q->next;
 	}
-	p->next = q->next;
-	q->next = q->next->next;
-	free(p);
+	if ((q->next->next) != NULL)
+	{
+		p->next = q->next;
+		q->next = q->next->next;
+		free(p);
+	}
 }
